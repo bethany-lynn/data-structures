@@ -1,20 +1,21 @@
 """Functions to parse a file containing villager data."""
 # import sys
-
+# name | species | personality | hobby | motto
 
 def all_species(filename):
+    """ return a set of unique species in the file"""
 
-    unique_species = set()
-    data = open(filename) #initializing the file
+    unique_species = set() #creates a set named unique_species - needs to be set so we dont get repeated species
+    data = open(filename) #initializing the file - filename could be called anything i choose
+    
     for line in data: #looping through every line in the file
-            trimmed_line = line.rstrip() #gets rid of the spaces 
-            tokenized_line = trimmed_line.split("|") #break it up with 
-            species = tokenized_line[1] 
-            unique_species.add(species)
-    print(unique_species)
-    return unique_species
+            tokens = line.split("|") #
+            unique_species.add(tokens[1])
+    unique_species = list(unique_species) # -- turns set into list
+    print(type(unique_species)) #prints out what type of data structure unique_species is
+    return sorted(unique_species)
 
-# all_species("villagers.csv")
+print(all_species("villagers.csv")) #has to be a string
 # 
 # 
 # 
@@ -107,7 +108,6 @@ def all_data(filename):
     data = open(filename)
     for line in data:
         all_data.append(tuple(line.rstrip().split("|")))
-
 
     return all_data
 
